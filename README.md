@@ -1,4 +1,5 @@
-envnews2014
+ENVNEWS.ORG
 ===========
+Information is Power
 
-powered by yii framework
+Powered by yii framework
