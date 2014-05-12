@@ -86,7 +86,7 @@ return array(
         //),
         // uncomment the following to use a MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=envnews',
+            'connectionString' => 'mysql:host=localhost;dbname=envnews2014',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => '',

@@ -61,7 +61,7 @@ class CronCommand extends CConsoleCommand {
         $mailList = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('{{user_subscription}}')
-                ->where('status=1 AND user_id IS NOT NULL AND categories IS NOT NULL')
+                ->where('status=1 AND user_id IS NOT NULL AND categories IS NOT NULL AND package_id IS NOT NULL')
                 ->queryAll();
 
         //$bccList = 'saidurwd@gmail.com, shapon.jms@gmail.com, aaratan@gmail.com, chandan_cch@yahoo.com, m.hasan199@yahoo.com';
