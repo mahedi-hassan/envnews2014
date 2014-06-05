@@ -98,7 +98,7 @@ $this->breadcrumbs = array(
                         $sub = Subscription::model()->findByAttributes(array('user_id' => $model->id));
                         ?>
                         <?php if ($sub->status == 1): ?>
-                            <h1 class="alert alert-success">Subscription Status</h1>
+                            <h1 class="alert alert-success">Subscription Status<?php echo CHtml::link('Change Categories', array('user/update', 'id' => $model->id, '#' => 'preference'), array('class' => 'pull-right btn btn-success btn-large btn-plain')) ?></h1>
                             <div class="row-fluid">
                                 <div class="span6 well">
                                     <h4 class="alert alert-info">User info</h4>
@@ -127,7 +127,7 @@ $this->breadcrumbs = array(
                                             echo '<h3 class = "alert alert-warning"><i class="fa fa-check text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class= "text-success">' . NewsCategory::getNewsCategoryName($category) . '</span></h3>';
                                         }
                                     }
-                                    ?>
+                                    ?>                                    
                                 </div>
 
                             </div>

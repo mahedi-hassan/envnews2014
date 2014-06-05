@@ -10,7 +10,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         <div class="alert alert-success"><h1 class="text-center">User Registration</h1></div>
         <p class="alert alert-info"><b>Already have an account?</b> Please, <strong style="font-size: 16px;"><?php echo CHtml::link('Log in', array('site/login')); ?></strong></p>
         <div class="well span6 no-l-margin">
-            <?php echo $form->errorSummary(array($model, $profile)); ?>
+            <?php echo $form->errorSummary(array($model, $profile,$subscription)); ?>
 
             <?php echo $form->textFieldControlGroup($model, 'name', array('class' => 'span12', 'maxlength' => 255)); ?>
             <?php echo $form->textFieldControlGroup($model, 'username', array('class' => 'span12', 'maxlength' => 150)); ?>
@@ -18,6 +18,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             <?php echo $form->passwordFieldControlGroup($model, 'password', array('class' => 'span12', 'maxlength' => 100)); ?>
             <?php echo $form->passwordFieldControlGroup($model, 'verifyPassword', array('class' => 'span12', 'maxlength' => 100)); ?>
             <?php echo $form->hiddenField($profile, 'user_id', array('class' => 'span12')); ?>
+            <?php echo $form->hiddenField($subscription, 'user_id', array('class' => 'span12')); ?>
              <?php //echo $form->checkBoxControlGroup($model, 'tos', array('class' => '')); ?>
             <p class="help-block">Fields with <span class="required">*</span> are required.</p>
             <?php

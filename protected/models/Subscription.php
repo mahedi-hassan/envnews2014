@@ -48,8 +48,10 @@ class Subscription extends CActiveRecord {
             array('user_id, package_id, subscription_type, status', 'numerical', 'integerOnly' => true),
             array('user_id', 'unique', 'message' => ("This user is already subscribes!.")),
             array('categories', 'safe'),
-            array('categories', 'required', 'message' => "Select atleast one item from {attribute}"),
-            array('categories', 'limitSelection'),
+            array('categories', 'required', 'message' => "Select atleast one item from {attribute}", 'on'=>'update'),
+            array('categories', 'limitSelection', 'on'=>'update'),
+            //array('categories', 'required', 'message' => "Select atleast one item from {attribute}"),
+            //array('categories', 'limitSelection'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, user_id, package_id, subscription_type, categories, status', 'safe', 'on' => 'search'),

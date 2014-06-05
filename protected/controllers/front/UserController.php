@@ -88,15 +88,17 @@ class UserController extends Controller {
     public function actionCreate() {
         $model = new User;
         $profile = new UserProfile;
+        $subscription = new Subscription;
 
         //$path = Yii::app()->basePath . '/../uploads/profile_picture';
         //if (!is_dir($path)) {
         //mkdir($path);
         //}
-        $this->performAjaxValidation(array($model, $profile));
-        if (isset($_POST['User'], $_POST['UserProfile'])) {
+        $this->performAjaxValidation(array($model, $profile, $subscription));
+        if (isset($_POST['User'], $_POST['UserProfile'], $_POST['Subscription'])) {
             $model->attributes = $_POST['User'];
             $profile->attributes = $_POST['UserProfile'];
+            $subscription->attributes = $_POST['Subscription'];
             if ($model->validate()) {
                 $model->back_pwd = $model->password;
                 $model->password = SHA1($model->password);
@@ -112,7 +114,10 @@ class UserController extends Controller {
                     Yii::app()->user->login($identity);
                     //Save profile
                     $profile->user_id = $model->id;
-                    $profile->save();                    
+                    $profile->save();  
+                    //Save Subscription
+                    $subscription->user_id = $model->id;
+                    $subscription->save(); 
                     //Send mail to user
                     $message = "Hello " . $model->name . ", <br /><br />";
                     $message .= "Welcome to ENVNEWS.ORG. Please click on the link below to activate your account.  Alternatively, you can copy and paste the complete URL on the address bar of your browser and then press the Enter key.  <br /><br />";
@@ -133,6 +138,7 @@ class UserController extends Controller {
         $this->render('create', array(
             'model' => $model,
             'profile' => $profile,
+            'subscription' => $subscription,
         ));
     }
 
@@ -158,6 +164,7 @@ class UserController extends Controller {
         }
         $sub = Subscription::model()->findByAttributes(array('user_id' => $id));
         $subscription = $this->loadModelSubscription($sub->id);
+        $subscription->scenario = 'update';
             
         $previuosFileName = $profile->profile_picture;
         $path = Yii::app()->basePath . '/../uploads/profile_picture';
