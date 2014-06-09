@@ -29,11 +29,11 @@ class SubscriptionController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'subscribe','payment'),
+                'actions' => array('create', 'update', 'subscribe', 'payment'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
+                'actions' => array('admin', 'delete', 'payment'),
                 'users' => array('admin'),
             ),
             array('deny', // deny all users
@@ -116,7 +116,7 @@ class SubscriptionController extends Controller {
             Yii::app()->db->createCommand('INSERT INTO {{user_profile}} (`user_id`) VALUES ("' . $user_id . '")')->execute();
         }
         $prof = UserProfile::model()->findByAttributes(array('user_id' => $user_id));
-        $profile = $this->loadModelProfile($prof->id);        
+        $profile = $this->loadModelProfile($prof->id);
         //$profile->scenario = 'subscribe';
         // Uncomment the following line if AJAX validation is needed
         $this->performAjaxValidation(array($model, $user, $profile));
@@ -148,9 +148,8 @@ class SubscriptionController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionPayment($id) {
-        $model = $this->loadModel($id);
-        $this->render('Payment', array(
-            'model' => $model,
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
         ));
     }
 

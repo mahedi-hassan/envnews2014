@@ -26,8 +26,9 @@ class NewsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view', 'admin', 'category', 'source'),
+                'actions' => array('index', 'category', 'source'),
                 'users' => array('*'),
+                'message' => 'You must be logged in as Member to perform this action.'
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update'),
@@ -48,6 +49,7 @@ class NewsController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
+        Yii::app()->db->createCommand('UPDATE {{news}} SET hits = hits+1 WHERE id=' . $id)->execute();
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));
